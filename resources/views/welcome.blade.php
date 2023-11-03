@@ -54,6 +54,7 @@
 
         <script type="text/javascript" src="{{asset('js/own/car.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/own/viewMyCar.js')}}"></script>
+        
         <script type="text/javascript" src="{{asset('js/own/sliderProps.js')}}"></script>
 
     </body>

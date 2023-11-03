@@ -2,6 +2,7 @@
 
 
 @section('content')
+
     <div class="container mt-5">
         <div class="row justify-content-center">
             
@@ -36,7 +37,7 @@
                                                 <th>comprador</th>
                                                 <th>Direccion Entrega</th>
                                                 <th>Fecha Compra</th>
-                                                <!--<th>Opciones</th>-->
+                                                <th>Opciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,7 +46,7 @@
                                                     <td>{{$item->name}}</td>
                                                     <td>{{$item->address}}</td>
                                                     <td>{{$item->create_at}}</td>
-                                                   <!-- <td><button class="btn btn-primary" data-id="{{$item->id}}">VIEW</button></td> -->
+                                                   <td><button type="button" class="btn btn-primary abrir" data-id="{{$item->id}}" data-toggle="modal" onclick="detail(this)" data-target="#exampleModal">Detalle</button></td>
                                                </tr>
                                            
                                             @endforeach
@@ -64,4 +65,40 @@
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap" id="tb-detalle">
+                <thead>
+                    <tr>                        
+                        <th>Nombre Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            
+        
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>    
 @endsection('content')

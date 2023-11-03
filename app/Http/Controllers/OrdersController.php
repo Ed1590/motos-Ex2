@@ -24,6 +24,18 @@ class OrdersController extends Controller
         return view('own.ordenes',compact('ordenes'));
     
     }
+    public function detailOrder($id)
+    {   
+       
+
+        $ordenes = OrdersDetailModel::select()
+        ->join("products","detailorders.idproduct","=","products.id")
+        ->where('idorder','=',$id)
+        ->get();
+    
+        return response()->json(['data'=> $ordenes,200]);
+    
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +45,7 @@ class OrdersController extends Controller
     public function create(Request $request)
     {
         $data =$request->all();
-        $bol = false;
+       
 
         DB::beginTransaction();
         $orders = new OrdersModel;
@@ -47,22 +59,13 @@ class OrdersController extends Controller
         $objDetail = json_decode($data["myCar"]);
 
         $save =$orders->save();
+        //dd($save);
 
         if($save){
-            foreach($objDetail as $item){
-
-                $detail = new OrdersDetailModel;
-                $detail->idOrder = $orders->id;
-                $detail->idProduct = $item->id;
-                $detail->counts = $item->cantidad;
-                $detail->totalPrice = $item->cantidad * $item->valor;
-                $saveDetail = $detail->save();
-                if($saveDetail == false){
-                    $bol= true;
-                }
-            }
+           $bolDetail = $this->createDetail($objDetail,$orders->id);
         }
-        if($save == true && $bol == false){
+
+        if($save == true && $bolDetail == false){
             db::commit();
         }else{
             db::rollBack();
@@ -71,6 +74,39 @@ class OrdersController extends Controller
 
 
         return response()->json(['data'=> $orders,200]);
+    }
+
+
+    public function createDetail($objDetail,$ordersId){
+        
+        
+       try {
+            $bolDetail = false;
+
+            foreach($objDetail as $item){
+
+                $detail = new OrdersDetailModel;
+                $detail->idorder = $ordersId;
+                $detail->idproduct = $item->id;
+                $detail->counts = $item->cantidad;
+                $detail->totalprice = $item->cantidad * $item->valor;
+                $saveDetail = $detail->save();
+                if($saveDetail == false){
+                    $bolDetail= true;
+                }
+            }
+            return $bolDetail;
+       } catch (\Throwable $th) {
+        //log($th);
+       }
+
+        
+
+    }
+
+    public function test(){
+        
+
     }
 
     /**

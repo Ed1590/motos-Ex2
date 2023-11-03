@@ -34,19 +34,19 @@
                 <div class="col-12">
                     <input type="hidden" class="_token" value="{{csrf_token() }}">
                     <h3 class="font-weight-bold">Nombre</h3>
-                    <input type="text" id="input-name" name="input-name" class="form-control">
+                    <input type="text" id="input-name" name="input-name" class="form-control inputVenta">
                 </div>
                 <div class="col-12">
                     <h3 class="font-weight-bold">Apellido</h3>
-                    <input type="text" id="input-lastName" name="input-lastName" class="form-control">
+                    <input type="text" id="input-lastName" name="input-lastName" class="form-control inputVenta">
                 </div>
                 <div class="col-12">
                     <h3 class="font-weight-bold">Direccion</h3>
-                    <input type="text" id="input-address" name="input-address" class="form-control">
+                    <input type="text" id="input-address" name="input-address" class="form-control inputVenta">
                 </div>
                 <div class="col-12">
                     <h3 class="font-weight-bold">Correo</h3>
-                    <input type="text" id="input-email" name="input-email" class="form-control">
+                    <input type="text" id="input-email" name="input-email" class="form-control inputVenta">
                 </div>
                 <div class="col-12">
                     <h3>Total</h3>

@@ -4,6 +4,7 @@
 
 @section('content')
 
+
 @stop
 
 @section('css')
@@ -11,5 +12,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script type="text/javascript" src="{{asset('js/own/orderDetail.js')}}"></script>
 @stop

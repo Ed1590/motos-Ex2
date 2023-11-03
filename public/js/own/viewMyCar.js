@@ -23,88 +23,66 @@ Array.from(array).forEach(elemInter => {
 
 $("#form-comprar").on('click','.comprar', function(element){
 
-    if($("#input-name").val() == "" || $("#input-name").val() == 0){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El Valor no puede ser 0'
-          })     
-    }else{
-        if($("#input-lastName").val() == "" || $("#input-lastName").val() == 0){
+    inputs = document.getElementsByClassName("inputVenta")
+    var vacio = false ;
+
+    for (var i = 0; i < inputs.length -1 ; i++) {
+        if(inputs[i].value ==''){
+            inputs[i].focus()
+            vacio = true;
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'El Valor no puede ser 0'
-              })     
-        }else{
-            if($("#input-address").val() == "" || $("#input-address").val() == 0){
+              icon: 'error',
+              title: 'Oops...',
+              text: 'No Pueden Haber Campos Vacios'
+            })   
+            break;
+        }
+      }
+
+    
+                    
+    var _token = $("._token").val();    
+    array = miStorage.getItem('myCar');
+        if (vacio == false){
+            
+  
+            fetch($("#form-comprar")[0].action, {
+                method: "POST",
+                body: JSON.stringify({
+                    name:$("#input-name").val(),
+                    lastName:$("#input-lastName").val(),
+                    address:$("#input-address").val(),
+                    email:$("#input-email").val(),
+                    myCar: array
+              }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  'X-CSRF-TOKEN':_token
+                },
+              })
+              .then((response) =>{
+                
+                if (response.status == 200) {
+                  
                 Swal.fire({
+                  icon: 'success',
+                 
+                  text: "Se Guardo Con Exito"
+                  })
+                }else{
+                  Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'El Valor no puede ser 0'
-                  })     
-            }else{
-                if($("#input-email").val() == "" || $("#input-email").val() == 0){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'El Valor no puede ser 0'
-                      })     
-                }else{
-                    
-                    var _token = $("._token").val();    
-                    array = miStorage.getItem('myCar');
-
-                    $.ajax({
-                        type:"POST",
-                        url: element.delegateTarget.action ,
-                        dataType: "json",
-                        contentType: "application/json; charset=utf-8",
-                        headers: {'X-CSRF-TOKEN':_token},
-                        data : JSON.stringify({ 
-                            name:$("#input-name").val(),
-                            lastName:$("#input-lastName").val(),
-                            address:$("#input-address").val(),
-                            email:$("#input-email").val(),
-                            myCar: array
-                
-                            }),
-                        success:function(response){
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Yeahh!',
-                                text: 'realizada la compra'
-                              })
-                              response
-                              
-                        },
-                        error: function(response) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'hubo un error'
-                              })   
-                        },
-                        failure: function(response) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'hubo un error'
-                              })   
-                        },
-                        timeout:10000
-                        })
-                }   
-            }   
-        }   
-    }
-
-  
-
+                    text: 'hubo un error'
+                  })   
+                }
+        
+        
+            })
     
    
         
-
+        }
     })
 
 })

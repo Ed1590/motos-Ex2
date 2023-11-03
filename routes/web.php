@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index']);
+Route::get('test', [App\Http\Controllers\HomeController::class, 'test']);
+
 
 Route::get('/ventas',function(){return view('own.ventas');});
 Route::get('/ordenes',function(){return view('own.ordenes');});
@@ -23,5 +25,9 @@ Route::get('myCar',function(){return view('myCar');})->name('myCar');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\OrdersController::class, 'index'])->name('home');
+Route::get('/ordenes/detail/{id}', [App\Http\Controllers\OrdersController::class, 'detailOrder'])->name('detailOrder');
+
+
+
 Route::post('/comprar', [App\Http\Controllers\OrdersController::class, 'create'])->name('comprar');
 

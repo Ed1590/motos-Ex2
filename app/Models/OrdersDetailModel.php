@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrdersDetailModel extends Model
 {
-    protected $table = 'detailOrders';
+    protected $table = 'detailorders';
      /**
      * Indicates if the model should be timestamped.
      *
