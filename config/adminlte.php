@@ -231,7 +231,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Mis Compras',
-            'url'  => 'Home',
+            'url'  => 'home',
             'icon_color' => 'yellow',
             'icon' => 'fas fa-fw fa-user',
         ],
